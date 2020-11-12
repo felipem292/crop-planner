@@ -3,7 +3,8 @@ import { Alert, Button, Col, Container, Row } from "react-bootstrap";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { FetchDelete } from "../../hooks/FetchDelete";
 import { useFetch } from "../../hooks/useFetch";
-import { EventsTable } from "../events/EventsTable";
+
+import { OptionsButtons } from "../OptionsButtons";
 
 export const OneField = () => {
   let history = useHistory();
@@ -58,7 +59,7 @@ export const OneField = () => {
             </Col>
           </Row>
           <Row>
-            <EventsTable {...field} />
+            <OptionsButtons {...field} />
           </Row>
         </>
       )}

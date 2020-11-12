@@ -45,7 +45,7 @@ export const CreateEvent = () => {
         validationSchema={schema}
         onSubmit={(values, { resetForm, setSubmitting }) => {
           setTimeout(async () => {
-            // console.log(JSON.stringify(values));
+            console.log(JSON.stringify(values));
 
             await FetchPost(url, values);
             setTimeout(() => {
@@ -58,6 +58,7 @@ export const CreateEvent = () => {
           nameEvent: "",
           dateEvent: dateString,
           detailEvent: "",
+          plannedEvent: false,
         }}
       >
         {({
@@ -109,7 +110,16 @@ export const CreateEvent = () => {
                 <Form.Control.Feedback type="invalid" tooltip>
                   {errors.nameEvent}
                 </Form.Control.Feedback>
+
+                <Form.Group>
+                  <Form.Check
+                    name="plannedEvent"
+                    label="Evento de monitoreo"
+                    onChange={handleChange}
+                  />
+                </Form.Group>
               </Form.Group>
+
               <Form.Group
                 as={Col}
                 md="4"

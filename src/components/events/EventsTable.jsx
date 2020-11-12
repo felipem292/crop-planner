@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Alert, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useFetch } from "../../hooks/useFetch";
 
-export const EventsTable = ({ _id }) => {
-  // console.log(_id);
+export const EventsTable = ({ radioValue, _id }) => {
+  // console.log(radioValue);
+  const [planned, setPlanned] = useState(radioValue);
+  useEffect(() => {
+    setPlanned(!planned);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [radioValue]);
+  // console.log("planned", planned);
   const url = `https://green-services.herokuapp.com/field/getevents/${_id}`;
   const { data, loading } = useFetch(url);
   const { eventDB } = !!data && data.field;
   // console.log(eventDB);
+
   return (
     <Table striped bordered hover size="sm">
       <thead>
@@ -27,7 +34,7 @@ export const EventsTable = ({ _id }) => {
         ) : (
           eventDB.map(
             (event) =>
-              event.active === true && (
+              event.plannedEvent === !planned && (
                 <tr key={event._id}>
                   <td>
                     {" "}
