@@ -114,7 +114,7 @@ export const CreateEvent = () => {
                 <Form.Group>
                   <Form.Check
                     name="plannedEvent"
-                    label="Evento de monitoreo"
+                    label="Evento de planeacion"
                     onChange={handleChange}
                   />
                 </Form.Group>

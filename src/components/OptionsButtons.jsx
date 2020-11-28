@@ -6,7 +6,7 @@ export const OptionsButtons = (field) => {
   const [radioValue, setRadioValue] = useState(false);
   const radios = [
     { name: "Monitoreo", value: true },
-    { name: "los otros", value: false },
+    { name: "Planeacion", value: false },
   ];
 
   const eventsType = { radioValue, ...field };
@@ -15,7 +15,7 @@ export const OptionsButtons = (field) => {
   return (
     <>
       <br />
-      <ButtonGroup toggle>
+      <ButtonGroup toggle className="mb-3">
         {radios.map((radio, idx) => (
           <ToggleButton
             key={idx}

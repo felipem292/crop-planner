@@ -1,12 +1,13 @@
 import React from "react";
-import { Alert, Col, Container, Row } from "react-bootstrap";
-import { Link, useParams } from "react-router-dom";
+import { Alert, Button, Col, Container, Row } from "react-bootstrap";
+import { Link, useHistory, useParams } from "react-router-dom";
+import { FetchPut } from "../../hooks/FetchPut";
 
 import { useFetch } from "../../hooks/useFetch";
 
 export const EventScreen = () => {
   const { eventId } = useParams();
-
+  const history = useHistory();
   const url = `https://green-services.herokuapp.com/field/getevent/${eventId}`;
   const { data, loading } = useFetch(url);
   const { event } = !!data && data;
@@ -70,6 +71,24 @@ export const EventScreen = () => {
               <p>{event.detailEvent}</p>
             </Col>
           </Row>
+          {event.plannedEvent &&
+            (event.executedEvent ? (
+              <Alert variant="success">Evento ejecutado</Alert>
+            ) : (
+              <Row>
+                <Button
+                  variant="outline-primary"
+                  onClick={() => {
+                    let checkUrl = `https://green-services.herokuapp.com/field/checkevent/${event._id}`;
+                    // console.log(checkUrl);
+                    FetchPut(checkUrl);
+                    history.goBack();
+                  }}
+                >
+                  Marcar evento como ejecutado
+                </Button>
+              </Row>
+            ))}
         </>
       )}
     </Container>
